@@ -6,7 +6,7 @@ import pygame
 from datetime import datetime
 import os
 
-# Initialize sound system
+# # Initialize sound system
 # pygame.mixer.init()
 
 # def play_sound(filename):
@@ -34,7 +34,7 @@ def create_task():
 # Initialize session state
 if "price" not in st.session_state:
     st.session_state.price, st.session_state.paid = create_task()
-    play_sound("sounds/new_task.wav")
+    # play_sound("sounds/new_task.wav")
     st.session_state.start_time = time.time()
     st.session_state.task_submitted = False
     st.session_state.result_message = ""
@@ -62,10 +62,10 @@ if st.button("✅ Submit"):
 
     if status == "Correct":
         st.success(f"✅ Correct! Change: ${correct_change}")
-        play_sound("sounds/correct.wav")
+        # play_sound("sounds/correct.wav")
     else:
         st.error(f"❌ Incorrect. Correct change is ${correct_change}")
-        play_sound("sounds/wrong.wav")
+        # play_sound("sounds/wrong.wav")
 
     result = {
         "Task": f"${st.session_state.paid} - ${st.session_state.price}",
