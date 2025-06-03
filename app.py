@@ -7,14 +7,14 @@ from datetime import datetime
 import os
 
 # Initialize sound system
-pygame.mixer.init()
+# pygame.mixer.init()
 
-def play_sound(filename):
-    try:
-        pygame.mixer.music.load(filename)
-        pygame.mixer.music.play()
-    except Exception as e:
-        st.warning(f"Sound error: {e}")
+# def play_sound(filename):
+#     try:
+#         pygame.mixer.music.load(filename)
+#         pygame.mixer.music.play()
+#     except Exception as e:
+#         st.warning(f"Sound error: {e}")
 
 # Initialize log file
 LOG_FILE = "log.csv"
