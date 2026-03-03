@@ -1,10 +1,2 @@
-<<<<<<< HEAD
 streamlit
 pandas
-o
-=======
-streamlit
-pygame
-pandas
-
->>>>>>> e63857d6a08b01ddb68cb163cccf17167120e275
