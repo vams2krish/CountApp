@@ -75,6 +75,26 @@ def play_sound(sound_name):
         pass
 
 # ==================== AUTH ====================
+import hashlib
+import secrets
+
+def hash_password(password):
+    """Hash a password using SHA-256 with a random salt"""
+    salt = secrets.token_hex(16)
+    password_with_salt = salt + password
+    hashed = hashlib.sha256(password_with_salt.encode()).hexdigest()
+    return f"{salt}${hashed}"
+
+def verify_password(password, stored_hash):
+    """Verify a password against a stored hash"""
+    try:
+        salt, hashed = stored_hash.split('$')
+        password_with_salt = salt + password
+        new_hash = hashlib.sha256(password_with_salt.encode()).hexdigest()
+        return new_hash == hashed
+    except:
+        return False
+
 def load_users():
     if USERS_FILE.exists():
         with open(USERS_FILE, "r") as f:
@@ -89,13 +109,18 @@ def register_user(username, password):
     users = load_users()
     if username in users:
         return False, "Username already exists"
-    users[username] = {"password": password, "created_at": datetime.now().isoformat()}
+    # Hash the password before storing
+    hashed_password = hash_password(password)
+    users[username] = {"password": hashed_password, "created_at": datetime.now().isoformat()}
     save_users(users)
     return True, "Registration successful"
 
 def verify_user(username, password):
     users = load_users()
-    return username in users and users[username]["password"] == password
+    if username in users:
+        stored_hash = users[username]["password"]
+        return verify_password(password, stored_hash)
+    return False
 
 # ==================== PROGRESS ====================
 def get_progress_file(username):
@@ -128,6 +153,24 @@ def save_user_progress(username, entry):
 def reset_user_progress(username):
     pf = get_progress_file(username)
     if pf.exists(): pf.unlink()
+
+def delete_user_account(username):
+    # Delete user from users.json
+    users = load_users()
+    if username in users:
+        del users[username]
+        save_users(users)
+    
+    # Delete user progress file
+    pf = get_progress_file(username)
+    if pf.exists():
+        pf.unlink()
+    
+    # Remove from leaderboard
+    leaderboard = load_leaderboard()
+    leaderboard = [entry for entry in leaderboard if entry['username'] != username]
+    with open(LEADERBOARD_FILE, 'w') as f:
+        json.dump(leaderboard, f, indent=2)
 
 # ==================== SETTINGS ====================
 def load_settings(username):
@@ -321,17 +364,6 @@ def login_page():
     st.markdown('<p class="main-title">💵 MathBlitz</p>', unsafe_allow_html=True)
     st.markdown('<p style="text-align:center; color: rgba(255,255,255,0.7); font-size: 1.3rem;">Master math skills with interactive exercises! 🧮</p>', unsafe_allow_html=True)
     
-    # Legal links
-    col_legal1, col_legal2, col_legal3 = st.columns([1, 1, 2])
-    with col_legal1:
-        if st.button("📜 Privacy Policy", use_container_width=True):
-            st.session_state.show_privacy_policy = True
-            st.rerun()
-    with col_legal2:
-        if st.button("📋 Terms of Service", use_container_width=True):
-            st.session_state.show_terms_of_service = True
-            st.rerun()
-    
     st.markdown("")  # Spacing
     
     col1, col2, col3 = st.columns([1,2,1])
@@ -370,6 +402,19 @@ def login_page():
                         else:
                             st.error(f"❌ {msg}")
         st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Legal links at bottom - centered side by side
+    col_legal1, col_legal2, col_legal3 = st.columns([1, 2, 1])
+    with col_legal2:
+        c1, c2 = st.columns(2)
+        with c1:
+            if st.button("Privacy Policy", key="priv_btn", use_container_width=True):
+                st.session_state.show_privacy_policy = True
+                st.rerun()
+        with c2:
+            if st.button("Terms of Service", key="tos_btn", use_container_width=True):
+                st.session_state.show_terms_of_service = True
+                st.rerun()
 
 def sidebar():
     custom_css()
@@ -394,6 +439,41 @@ def sidebar():
         st.markdown("---")
         menu_options = [("🎮 Practice", "practice"), ("📊 Progress", "progress"), ("⚙️ Settings", "settings")]
         selected = st.radio("menu", [m[0] for m in menu_options], label_visibility="collapsed")
+        st.markdown("---")
+        
+        # Delete Account option with 2-step confirmation
+        if "delete_confirm" not in st.session_state:
+            st.session_state.delete_confirm = False
+        if "delete_step" not in st.session_state:
+            st.session_state.delete_step = 0
+        
+        if st.session_state.delete_confirm:
+            # Step 2: Final confirmation
+            st.warning(f"⚠️ Type '{st.session_state.username}' to confirm delete:")
+            confirm_text = st.text_input("Enter username to confirm", key="confirm_delete_input")
+            col_del1, col_del2 = st.columns(2)
+            with col_del1:
+                if st.button("✅ Confirm Delete", use_container_width=True):
+                    if confirm_text == st.session_state.username:
+                        delete_user_account(st.session_state.username)
+                        st.session_state.logged_in = False
+                        st.session_state.delete_confirm = False
+                        st.session_state.delete_step = 0
+                        st.success("✅ Account deleted successfully!")
+                        st.rerun()
+                    else:
+                        st.error("❌ Username doesn't match")
+            with col_del2:
+                if st.button("❌ Cancel", use_container_width=True):
+                    st.session_state.delete_confirm = False
+                    st.session_state.delete_step = 0
+                    st.rerun()
+        else:
+            if st.button("🗑️ Delete Account", use_container_width=True):
+                st.session_state.delete_confirm = True
+                st.session_state.delete_step = 1
+                st.rerun()
+        
         st.markdown("---")
         if st.button("🚪 Logout", use_container_width=True):
             st.session_state.logged_in = False
