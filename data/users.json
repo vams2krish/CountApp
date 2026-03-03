@@ -1,0 +1,15 @@
+{
+  "Vams": {
+    "password": "zxcvbnm@2",
+    "created_at": "2026-03-03T03:23:53.364188",
+    "settings": {
+      "sound_enabled": true,
+      "default_difficulty": "Medium",
+      "default_exercise": "Discount Calculator"
+    }
+  },
+  "karan": {
+    "password": "zxcvbnm@2",
+    "created_at": "2026-03-03T04:58:19.817136"
+  }
+}

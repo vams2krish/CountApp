@@ -1,0 +1,46 @@
+Timestamp,Mode,Exercise,Difficulty,UserAnswer,CorrectAnswer,Status,TimeTaken,Points
+2026-03-03T03:35:32.064558,Tip Calculator,Tip Calculator,Medium,35.0,35.8,Incorrect,13.62,0
+2026-03-03T03:35:34.353679,Tip Calculator,Tip Calculator,Medium,35.0,35.8,Incorrect,15.91,0
+2026-03-03T03:35:35.738220,Tip Calculator,Tip Calculator,Medium,35.0,35.8,Incorrect,17.3,0
+2026-03-03T03:35:36.902115,Tip Calculator,Tip Calculator,Medium,35.0,35.8,Incorrect,18.46,0
+2026-03-03T03:35:37.819135,Tip Calculator,Tip Calculator,Medium,35.0,35.8,Incorrect,19.38,0
+2026-03-03T03:35:39.032884,Tip Calculator,Tip Calculator,Medium,35.0,35.8,Incorrect,20.59,0
+2026-03-03T03:35:42.440466,Tip Calculator,Tip Calculator,Medium,35.08,35.8,Incorrect,24.0,0
+2026-03-03T03:35:52.953427,Tip Calculator,Tip Calculator,Medium,35.09,32.4,Incorrect,4.97,0
+2026-03-03T03:36:11.457407,Tip Calculator,Tip Calculator,Medium,32.4,32.4,Correct,23.45,24
+2026-03-03T03:36:17.454088,Tip Calculator,Tip Calculator,Medium,32.4,32.4,Correct,29.47,23
+2026-03-03T03:48:20.692459,Tax Calculator,Tax Calculator,Medium,61.95,61.95,Correct,26.68,23
+2026-03-03T03:48:46.180342,Tax Calculator,Tax Calculator,Medium,54.24,54.24,Correct,15.64,25
+2026-03-03T03:49:05.227614,Tax Calculator,Tax Calculator,Medium,19.1,19.1,Correct,14.98,26
+2026-03-03T03:49:13.967285,Tax Calculator,Tax Calculator,Medium,50.0,34.0,Incorrect,4.61,0
+2026-03-03T03:50:11.153198,Currency Convert,Currency Convert,Medium,12144.0,9768.0,Incorrect,27.41,0
+2026-03-03T03:50:38.309855,Currency Convert,Currency Convert,Medium,400.0,363.44,Incorrect,24.05,0
+2026-03-03T04:16:02.622907,Billing Calculation,Billing Calculation,Medium,800.0,760.0,Incorrect,32.37,0
+2026-03-03T04:16:20.144510,Billing Calculation,Billing Calculation,Medium,900.0,900.0,Correct,10.43,26
+2026-03-03T04:16:49.780905,Billing Calculation,Billing Calculation,Medium,780.0,780.0,Correct,22.88,24
+2026-03-03T04:18:57.927630,Percentage,Percentage,Medium,0.0,0.0,Timeout,45.0,0
+2026-03-03T04:19:20.159019,Percentage,Percentage,Medium,114.66,114.66,Correct,20.7,24
+2026-03-03T04:19:39.071320,Percentage,Percentage,Medium,69.81,53.7,Incorrect,16.01,0
+2026-03-03T04:20:11.270273,Percentage,Percentage,Medium,10.4,10.4,Correct,28.83,23
+2026-03-03T04:21:28.973986,Currency Convert,Currency Convert,Medium,313.04,313.04,Correct,38.9,21
+2026-03-03T04:22:47.164990,Unit Price Compare,Unit Price Compare,Easy,2.0,2.0,Correct,10.17,19
+2026-03-03T04:22:56.903061,Unit Price Compare,Unit Price Compare,Easy,1.0,1.0,Correct,4.39,21
+2026-03-03T04:23:49.288427,Tax Calculator,Tax Calculator,Medium,52.0,60.9,Incorrect,5.58,0
+2026-03-03T04:27:13.543484,Tax Calculator,Tax Calculator,Medium,25.0,42.7,Incorrect,7.99,0
+2026-03-03T04:28:10.908928,Discount Calculator,Discount Calculator,Medium,161.6,242.4,Incorrect,43.4,0
+2026-03-03T04:28:32.905203,Discount Calculator,Discount Calculator,Medium,31.4,282.6,Incorrect,19.58,0
+2026-03-03T04:28:57.589544,Discount Calculator,Discount Calculator,Medium,114.9,268.1,Incorrect,21.52,0
+2026-03-03T04:30:08.434886,Discount Calculator,Discount Calculator,Medium,0.0,0.0,Timeout,45.0,0
+2026-03-03T04:30:39.746572,Discount Calculator,Discount Calculator,Medium,248.4,248.4,Correct,19.4,25
+2026-03-03T04:35:27.821545,Profit/Loss,Profit/Loss,Medium,0.0,0.0,Timeout,45.0,0
+2026-03-03T04:35:47.265732,Profit/Loss,Profit/Loss,Medium,0.28,28.08,Incorrect,16.55,0
+2026-03-03T04:36:21.026685,Profit/Loss,Profit/Loss,Medium,59.7,59.7,Correct,28.09,23
+2026-03-03T04:40:47.967764,Discount Calculator,Discount Calculator,Medium,0.0,0.0,Timeout,45.0,0
+2026-03-03T04:41:14.598863,Discount Calculator,Discount Calculator,Medium,335.25,335.25,Correct,22.22,24
+2026-03-03T04:47:29.639218,Discount Calculator,Discount Calculator,Medium,0.0,0.0,Timeout,45.0,0
+2026-03-03T04:49:08.232625,Split Bill,Split Bill,Medium,0.0,0.0,Timeout,45.0,0
+2026-03-03T04:59:40.553679,Discount Calculator,Discount Calculator,Medium,0.0,73.5,Incorrect,16.0,0
+2026-03-03T05:00:04.955708,Cash Counting,Cash Counting,Medium,23.0,23.0,Correct,12.35,26
+2026-03-03T05:03:23.601122,Cash Counting,Cash Counting,Medium,0.0,0.0,Timeout,45.0,0
+2026-03-03T05:03:40.728788,Cash Counting,Cash Counting,Medium,11.0,11.0,Correct,14.79,26
+2026-03-03T05:05:06.995677,Cash Counting,Cash Counting,Medium,27.0,27.0,Correct,12.16,26
