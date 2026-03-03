@@ -309,15 +309,28 @@ def custom_css():
 
 def login_page():
     custom_css()
+    
+    # Check if showing legal pages
+    if st.session_state.get("show_privacy_policy"):
+        show_privacy_policy_page()
+        return
+    if st.session_state.get("show_terms_of_service"):
+        show_terms_of_service_page()
+        return
+    
     st.markdown('<p class="main-title">💵 MathBlitz</p>', unsafe_allow_html=True)
     st.markdown('<p style="text-align:center; color: rgba(255,255,255,0.7); font-size: 1.3rem;">Master math skills with interactive exercises! 🧮</p>', unsafe_allow_html=True)
     
     # Legal links
-    col_legal1, col_legal2 = st.columns([1, 1])
+    col_legal1, col_legal2, col_legal3 = st.columns([1, 1, 2])
     with col_legal1:
-        st.markdown('[📜 Privacy Policy](privacy_policy.md)', unsafe_allow_html=True)
+        if st.button("📜 Privacy Policy", use_container_width=True):
+            st.session_state.show_privacy_policy = True
+            st.rerun()
     with col_legal2:
-        st.markdown('[📋 Terms of Service](terms_of_service.md)', unsafe_allow_html=True)
+        if st.button("📋 Terms of Service", use_container_width=True):
+            st.session_state.show_terms_of_service = True
+            st.rerun()
     
     st.markdown("")  # Spacing
     
@@ -606,6 +619,173 @@ def settings_page():
             st.session_state.streak = 0
             st.success("✅ Progress reset!")
         st.markdown('</div>', unsafe_allow_html=True)
+
+# ==================== LEGAL PAGES ====================
+def show_privacy_policy_page():
+    custom_css()
+    st.markdown('<p class="main-title">📜 Privacy Policy</p>', unsafe_allow_html=True)
+    
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    
+    st.markdown("""
+    **Last Updated:** January 2025
+
+    ## Overview
+
+    MathBlitz ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how your personal information is collected, used, and disclosed by MathBlitz.
+
+    ## Information We Collect
+
+    ### Information You Provide
+    - **Account Information:** When you register, we collect your username and password.
+    - **Progress Data:** We store your practice progress, scores, and achievements.
+    - **Settings:** We save your preferences (sound settings, default difficulty, etc.)
+
+    ### Automatically Collected Information
+    - **Usage Data:** We collect information about how you use the app (exercises completed, time spent, etc.)
+    - **Device Information:** Basic device information for app functionality
+
+    ## How We Use Your Information
+
+    We use your information to:
+    - Provide and improve our math practice services
+    - Track your progress and achievements
+    - Maintain leaderboard rankings
+    - Save your preferences and settings
+    - Communicate important updates
+
+    ## Data Storage
+
+    - All user data is stored locally on your device
+    - Progress data is saved as CSV files in your local `data/progress` folder
+    - User credentials are stored in `data/users.json`
+    - We do not sell or share your personal information with third parties
+
+    ## Data Security
+
+    We implement appropriate security measures to protect your personal information:
+    - Passwords are stored securely
+    - Local data storage is protected by your device's security
+    - No sensitive payment information is collected
+
+    ## Your Rights
+
+    You have the right to:
+    - Access your personal data
+    - Delete your account and associated data
+    - Reset your progress at any time
+    - Export your data in CSV format
+
+    ## Children's Privacy
+
+    MathBlitz is designed for general audiences, including children. We do not knowingly collect personal information from children under 13 without parental consent.
+
+    ## Changes to This Policy
+
+    We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page.
+
+    ## Contact Us
+
+    If you have any questions about this Privacy Policy, please contact us through the app.
+
+    ---
+
+    By using MathBlitz, you agree to the terms outlined in this Privacy Policy.
+    """, unsafe_allow_html=True)
+    
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    if st.button("🔙 Back to Login", use_container_width=True):
+        st.session_state.show_privacy_policy = False
+        st.rerun()
+
+def show_terms_of_service_page():
+    custom_css()
+    st.markdown('<p class="main-title">📋 Terms of Service</p>', unsafe_allow_html=True)
+    
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    
+    st.markdown("""
+    **Last Updated:** January 2025
+
+    ## Acceptance of Terms
+
+    By accessing and using MathBlitz ("the App"), you accept and agree to be bound by the terms and provision of this agreement.
+
+    ## Description of Service
+
+    MathBlitz is an interactive math practice application that provides:
+    - 11 different math exercise types
+    - Gamification features including scoring and streaks
+    - World leaderboard rankings
+    - User progress tracking
+    - Multiple difficulty levels
+
+    ## User Accounts
+
+    ### Registration
+    - You must provide accurate and complete registration information
+    - You are responsible for maintaining the security of your account
+    - You must be at least 13 years old to create an account
+
+    ### Account Responsibilities
+    - You are solely responsible for all activities under your account
+    - You must notify us immediately of any unauthorized use
+    - You agree not to share your account credentials with others
+
+    ## Acceptable Use
+
+    You agree not to:
+    - Use the app for any unlawful purpose
+    - Attempt to gain unauthorized access to any part of the app
+    - Interfere with the proper operation of the app
+    - Submit false or misleading information
+    - Create multiple accounts to manipulate leaderboards
+
+    ## Intellectual Property
+
+    - All content and materials in MathBlitz are owned by us
+    - You may not copy, modify, or distribute our content without permission
+    - The "MathBlitz" name and logo are our trademarks
+
+    ## User-Generated Content
+
+    You retain ownership of any progress data you generate while using the app. By using the app, you grant us the right to display your username and scores on the leaderboard.
+
+    ## Disclaimers
+
+    THE APP IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. WE DO NOT GUARANTEE THAT THE APP WILL BE UNINTERRUPTED OR ERROR-FREE.
+
+    ## Limitation of Liability
+
+    We shall not be liable for any indirect, incidental, or consequential damages arising from your use of the app.
+
+    ## Termination
+
+    We reserve the right to terminate or suspend your account at any time for violation of these terms.
+
+    ## Changes to Terms
+
+    We may modify these terms at any time. Continued use of the app constitutes acceptance of updated terms.
+
+    ## Governing Law
+
+    These terms shall be governed by and construed in accordance with applicable laws.
+
+    ## Contact
+
+    For questions about these Terms of Service, please contact us through the app.
+
+    ---
+
+    By using MathBlitz, you acknowledge that you have read and understood these Terms of Service and agree to be bound by them.
+    """, unsafe_allow_html=True)
+    
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    if st.button("🔙 Back to Login", use_container_width=True):
+        st.session_state.show_terms_of_service = False
+        st.rerun()
 
 def main():
     if "logged_in" not in st.session_state:
