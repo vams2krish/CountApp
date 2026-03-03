@@ -311,6 +311,16 @@ def login_page():
     custom_css()
     st.markdown('<p class="main-title">💵 MathBlitz</p>', unsafe_allow_html=True)
     st.markdown('<p style="text-align:center; color: rgba(255,255,255,0.7); font-size: 1.3rem;">Master math skills with interactive exercises! 🧮</p>', unsafe_allow_html=True)
+    
+    # Legal links
+    col_legal1, col_legal2 = st.columns([1, 1])
+    with col_legal1:
+        st.markdown('[📜 Privacy Policy](privacy_policy.md)', unsafe_allow_html=True)
+    with col_legal2:
+        st.markdown('[📋 Terms of Service](terms_of_service.md)', unsafe_allow_html=True)
+    
+    st.markdown("")  # Spacing
+    
     col1, col2, col3 = st.columns([1,2,1])
     with col2:
         st.markdown('<div class="card">', unsafe_allow_html=True)
