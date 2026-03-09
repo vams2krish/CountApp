@@ -326,6 +326,137 @@ def custom_css():
     .stSelectbox > div > div > div { background: rgba(255,255,255,0.1) !important; border-radius: 12px !important; }
     @keyframes slideIn { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+    
+    /* Time's Up Popup Styles */
+    .times-up-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 9998;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .times-up-popup {
+        background: linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
+        backdrop-filter: blur(20px);
+        border-radius: 25px;
+        padding: 40px;
+        border: 3px solid #ef4444;
+        box-shadow: 0 20px 60px rgba(239, 68, 68, 0.5);
+        text-align: center;
+        max-width: 90%;
+        animation: popIn 0.3s ease;
+    }
+    @keyframes popIn {
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+    .times-up-title {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #ef4444;
+        animation: pulse 1s infinite;
+        margin-bottom: 20px;
+    }
+    .times-up-message {
+        color: white;
+        font-size: 1.2rem;
+        margin: 15px 0;
+    }
+    .times-up-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 25px;
+        flex-wrap: wrap;
+    }
+    .times-up-btn {
+        padding: 15px 30px !important;
+        border-radius: 15px !important;
+        font-size: 1.1rem !important;
+        font-weight: bold !important;
+        border: none !important;
+        cursor: pointer;
+        transition: all 0.3s !important;
+    }
+    .continue-btn {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+        color: white !important;
+    }
+    .continue-btn:hover {
+        transform: scale(1.05) !important;
+        box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4) !important;
+    }
+    .next-task-btn {
+        background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%) !important;
+        color: white !important;
+    }
+    .next-task-btn:hover {
+        transform: scale(1.05) !important;
+        box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4) !important;
+    }
+    
+    /* Difficulty Selection Styles */
+    .difficulty-container {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin: 10px 0;
+    }
+    .difficulty-btn {
+        padding: 12px 25px !important;
+        border-radius: 12px !important;
+        font-weight: bold !important;
+        font-size: 1rem !important;
+        border: 2px solid transparent !important;
+        cursor: pointer;
+        transition: all 0.3s ease !important;
+        opacity: 0.7;
+    }
+    .difficulty-btn.selected {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    .difficulty-btn.easy {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+        color: white !important;
+        border-color: #10b981 !important;
+    }
+    .difficulty-btn.easy.selected {
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.6) !important;
+    }
+    .difficulty-btn.medium {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+        color: white !important;
+        border-color: #f59e0b !important;
+    }
+    .difficulty-btn.medium.selected {
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.6) !important;
+    }
+    .difficulty-btn.hard {
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+        color: white !important;
+        border-color: #ef4444 !important;
+    }
+    .difficulty-btn.hard.selected {
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.6) !important;
+    }
+    
+    /* Activity Title Style */
+    .activity-title {
+        background: linear-gradient(90deg, #7b2ff7, #f107a3);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 1.3rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 8px;
+    }
+    
     @media (max-width: 768px) {
         .stApp { padding: 10px; }
         .main-title { font-size: 2rem !important; }
@@ -339,6 +470,10 @@ def custom_css():
         .success-msg, .error-msg { font-size: 1.2rem !important; padding: 15px !important; }
         .share-container { flex-wrap: wrap; }
         .share-btn { padding: 8px 15px; font-size: 0.9rem; }
+        .times-up-popup { padding: 25px; }
+        .times-up-title { font-size: 2rem; }
+        .times-up-buttons { flex-direction: column; }
+        .difficulty-container { flex-wrap: wrap; }
     }
     @media (max-width: 480px) {
         .main-title { font-size: 1.8rem !important; }
@@ -870,6 +1005,34 @@ def show_terms_of_service_page():
 def main():
     if "logged_in" not in st.session_state:
         st.session_state.logged_in = False
+    
+    # Try to restore session from localStorage (only on first load)
+    if not st.session_state.logged_in and "session_restored" not in st.session_state:
+        # Use Streamlit's on_change callback mechanism via JavaScript
+        st.markdown("""
+        <script>
+        // Check for saved session on page load
+        (function() {
+            try {
+                var stored = localStorage.getItem('mathblitz_user');
+                if (stored) {
+                    var data = JSON.parse(stored);
+                    var sevenDays = 7 * 24 * 60 * 60 * 1000;
+                    if (new Date().getTime() - data.timestamp < sevenDays) {
+                        // Store username to restore after page reload
+                        sessionStorage.setItem('restore_user', data.username);
+                    }
+                }
+            } catch(e) {}
+        })();
+        </script>
+        """, unsafe_allow_html=True)
+        
+        # Check if we should restore session (via query params workaround)
+        # Since Streamlit doesn't support direct session restoration from JS,
+        # we'll rely on the login form to persist session
+        st.session_state.session_restored = True
+    
     if not st.session_state.logged_in:
         login_page()
         return

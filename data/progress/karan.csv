@@ -1,2 +1,4 @@
 Timestamp,Mode,Exercise,Difficulty,UserAnswer,CorrectAnswer,Status,TimeTaken,Points
 2026-03-03T04:59:00.652521,Cash Counting,Cash Counting,Medium,49.0,49,Correct,24.42,24
+2026-03-03T06:44:49.887248,Cash Counting,Cash Counting,Medium,18.0,18,Correct,16.04,25
+2026-03-03T06:45:05.400533,Cash Counting,Cash Counting,Medium,20.0,20,Correct,11.91,26
