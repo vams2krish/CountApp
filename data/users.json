@@ -1,6 +1,6 @@
 {
   "Vams": {
-    "password": "zxcvbnm@2",
+    "password": "7703dd9e1395a0da2a859ee590c65192$d2686bc6d93f5a27d40578d69b6ed7f633ef9ed8ebf52a3aed21b56af6d7f093",
     "created_at": "2026-03-03T03:23:53.364188",
     "settings": {
       "sound_enabled": true,
@@ -15,9 +15,5 @@
   "Karan": {
     "password": "a3c9887416fe612aa0358f0eaafbdc53$5c97fe6a28a4ebb9b209e38f1c0805859623f76293e7604d64f75c4658769864",
     "created_at": "2026-03-03T06:44:16.959884"
-  },
-  "Krish2": {
-    "password": "b28429243ca96a88d577cebd83423c98$4baad5849ef76cd21b1aa3d705247b85821f68be374cfc40a5211188171df8b5",
-    "created_at": "2026-03-09T15:14:08.181580"
   }
 }
